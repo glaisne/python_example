@@ -13,7 +13,7 @@ Testing a Jenkins env. with Python script to Azure using pylint and pytest
 ## pylint
 configuration file created from this call:
 ```cmd
-pylint --disable=no-else-return,trailing-whitespace --generate-rcfile > pylint.config
+pylint --disable=no-else-return,trailing-whitespace --generate-rcfile --max-line-length 140 > pylint.config2
 ```
 Then the file was paired down to just the parts that were configured, leaving the rest of it configured to use
 the defaults.
@@ -47,7 +47,7 @@ the defaults.
 
 ### PyTest
  - https://docs.pytest.org/
- 
+
 ### PyLint
  - https://pylint.pycqa.org/
 
