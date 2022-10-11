@@ -51,9 +51,22 @@ def validate_resource_group_name(resource_group_name):
     regex = r"^[-\w\._\(\)]+$"
 
     if re.match(regex, resource_group_name, flags=re.IGNORECASE):
-        return 1
+        # Also check for ending with a '.'
+        # from https://learn.microsoft.com/en-us/rest/api/resources/resource-groups/create-or-update
+        # The name of the resource group to create or update. 
+        # Can include alphanumeric, underscore, parentheses, 
+        # hyphen, period (except at end), and Unicode characters 
+        # that match the allowed characters.
+        if re.match(r".*\.$", resource_group_name):
+            print('first 0')
+            return 0
+        else:
+            print('first 1')
+            return 1
     else:
+        print('second 0')
         return 0
+        
 
 def validate_location(location):
     '''

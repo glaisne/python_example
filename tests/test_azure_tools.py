@@ -10,7 +10,10 @@ def test_valid_guid():
     assert az.validate_guid('670196b2-4db2-4cb2-a792-088bcfb4efc1') == 1
 
 def test_invalid_guid():
-    '''test that an invalid guid returns 0'''
+    '''
+    test that an invalid guid returns 0
+    It is invalid because there are too few characters
+    '''
     assert az.validate_guid('670196b2-4db2-4cb2-a792-088bcfb4efc') == 0
 
 def test_validate_rg_name():
@@ -20,20 +23,20 @@ def test_validate_rg_name():
 def test_bad_rg_name01():
     '''
     test a valid resource group name
-    It is invalid becasue there is an '_'
+    It is invalid becasue there is a '.' at the end
     '''
-    assert az.validate_resource_group_name('this_isainvalidrgname') == 0
+    assert az.validate_resource_group_name('thisisaninvalidresourcegroupname.') == 0
 
 def test_bad_rg_name02():
     '''
     test a valid resource group name
-    It is invalid becasue there is a capital letter
+    It is invalid becasue there is a '|'
     '''
-    assert az.validate_resource_group_name('Thisisainvalidrgname') == 0
+    assert az.validate_resource_group_name('thisisaninvalid|resourcegroupname') == 0
 
 def test_bad_rg_name03():
     '''
     test a valid resource group name
-    It is invalid becasue it is too long
+    It is invalid becasue there is a '/'
     '''
-    assert az.validate_resource_group_name('thisisavalidresourcegroupname') == 0
+    assert az.validate_resource_group_name('thisisaninvalid/resourcegroupname') == 0
