@@ -15,25 +15,25 @@ def test_invalid_guid():
 
 def test_validate_rg_name():
     '''test a valid resource group name'''
-    assert az.validate_resource_group_name('thisisavalidrgname') = 1
+    assert az.validate_resource_group_name('thisisavalidrgname') == 1
 
 def test_bad_rg_name01():
     '''
     test a valid resource group name
     It is invalid becasue there is an '_'
     '''
-    assert az.validate_resource_group_name('this_isainvalidrgname') = 0
+    assert az.validate_resource_group_name('this_isainvalidrgname') == 0
 
 def test_bad_rg_name02():
     '''
     test a valid resource group name
     It is invalid becasue there is a capital letter
     '''
-    assert az.validate_resource_group_name('Thisisainvalidrgname') = 0
+    assert az.validate_resource_group_name('Thisisainvalidrgname') == 0
 
 def test_bad_rg_name03():
     '''
     test a valid resource group name
     It is invalid becasue it is too long
     '''
-    assert az.validate_resource_group_name('thisisavalidresourcegroupname') = 0
+    assert az.validate_resource_group_name('thisisavalidresourcegroupname') == 0
