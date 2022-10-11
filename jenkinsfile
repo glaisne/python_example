@@ -21,7 +21,7 @@ pipeline {
         }
         stage ("linting") {
             steps {
-                pylint --rcfile .\pylint.config --reports y az
+                sh("pylint --rcfile ./pylint.config --reports y az")
             }
         }
     }
