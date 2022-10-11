@@ -1,0 +1,18 @@
+# import the azure module from the parent directory
+import json
+from .context import az
+from azure.identity import AzureCliCredential
+
+# import base json configuration file
+with open(config_file_path, "r") as config_base:
+    config_data = config_base.read()
+
+config = json.loads(config_data)
+
+# Acquire a credential object using CLI-based authentication.
+credential = AzureCliCredential()
+
+
+#todo: Working here. getting everything together ot create a resoruce group and try testing it.
+
+az.create_resource_group()
