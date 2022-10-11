@@ -40,3 +40,14 @@ def test_bad_rg_name03():
     It is invalid becasue there is a '/'
     '''
     assert az.validate_resource_group_name('thisisaninvalid/resourcegroupname') == 0
+
+def test_valid_location():
+    '''test a valid entry in the list of locations'''
+    assert az.validate_location('eastus') == 1
+
+def test_invalid_location_01():
+    '''
+    test an invalid location name
+    It is invalid because it is a random set of characters
+    '''
+    assert az.validate_location('asdfasnfwjdfsh') == 0
