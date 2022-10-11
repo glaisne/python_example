@@ -8,8 +8,8 @@ Module for working with Azure SDK
 #
 ###############################################################################
 
-from azure.mgmt.resource import ResourceManagementClient
 import re
+from azure.mgmt.resource import ResourceManagementClient
 
 ###############################################################################
 #
@@ -125,7 +125,7 @@ def validate_storage_account_name(storage_account_name):
 #!    - Should we "set" those values in the module as global variables early on?
 #!    - Should we pass it in as one dictionary variable each time (cred, subscription_id, resoruce_group, locaiton...)
 
-def create_resource_group(credential, resoruce_group_name, locaiton):
+def create_resource_group(credential, config):
     '''
     Create a resource group with the given name in the given locaiton
 
@@ -140,14 +140,14 @@ def create_resource_group(credential, resoruce_group_name, locaiton):
     httpresponseerror - https://learn.microsoft.com/en-us/python/api/azure-core/azure.core.exceptions.httpresponseerror?view=azure-python
     '''
     # validate parameters
-    if (not az_tools.validate_guid(config['subscription_id'])):
+    if not validate_guid(config['subscription_id']):
         raise ValueError(f"'{config['subscription_id']}' is NOT a valid"
                           " guid.")
-    if (not az_tools.validate_resource_group_name(
-                config['resource_group_name'])):
+    if not validate_resource_group_name(
+                config['resource_group_name']):
         raise ValueError(f"'{config['resource_group_name']}' is NOT a valid"
                           " resource group name.")
-    if (not az_tools.validate_location(config['location'])):
+    if not validate_location(config['location']):
         raise ValueError(f"'{config['location']}' is NOT a valid location.")
 
     # Obtain the management object for resources.
