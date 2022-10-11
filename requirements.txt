@@ -1,1 +1,2 @@
+pylint
 azure-mgmt-resource>=18.0.0

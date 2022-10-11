@@ -6,9 +6,17 @@ pipeline {
         }
     }
     stages {
+        stage ("setup") {
+                echo 'Install requirements...'
+                sh("pip3 install -r requirements.txt")
+        }
         stage ("Information") {
             steps {
                 echo 'Designing a python/Jenkins example setup'
+
+                echo 'Python information'
+                sh("pip3 list")
+                sh("python3 -V")
             }
         }
         stage ("linting") {
