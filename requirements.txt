@@ -1,2 +1,3 @@
 pylint
+pytest
 azure-mgmt-resource>=18.0.0

@@ -26,5 +26,10 @@ pipeline {
                 sh("python3 -m pylint --rcfile ./pylint.config --reports y az")
             }
         }
+        stage ("python unit tests") {
+            steps {
+                sh("python3 -m pytest")
+            }
+        }
     }
 }
