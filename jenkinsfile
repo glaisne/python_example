@@ -62,6 +62,8 @@ pipeline {
         }
         stage ("Infrastructure tests") {
             steps {
+                sh("ls tests/infrastructre_tests/test_az_resource_group.py -la")
+                sh("ls ./tests/infrastructre_tests/test_az_resource_group.py -la")
                 //sh("cp ./config_testing.py tests/config_testing.py")
                 //sh("python3 tests/infrastructre_tests/test_storage_account.py")
                 sh("python3 tests/infrastructre_tests/test_az_resource_group.py")
