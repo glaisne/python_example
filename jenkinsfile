@@ -32,7 +32,7 @@ pipeline {
         }
         stage ("python unit tests") {
             steps {
-                sh("python3 -m pytest tests/python_unit_tests/ -vv")
+                sh("python3 -m pytest ./tests/python_unit_tests/ -vv")
             }
         }
         stage ("Azure Auth") {
