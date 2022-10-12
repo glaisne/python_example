@@ -5,9 +5,9 @@ Testing a Jenkins env. with Python script to Azure using pylint and pytest
 * ./requirements.txt - List of modules required by this project to be called by pip for installation
 * ./azure.py - Module of Azure classes and methods used for this project  
 * ./tests - Folder for all files related to testing
-* ./tests/__init__.py - for some reason, this file is needed. pytests won't work without it. it is empty.
-* ./tests/context.py - Used for importing root folder modules (./azure.py in this example)
-* ./tests/test_azure_storage_account.py - Test script for Storage Account code within the azure module.
+* ./tests/python_unit_tests/__init__.py - for some reason, this file is needed. pytests won't work without it. it is empty.
+* ./tests/python_unit_tests/context.py - Used for importing root folder modules (./azure.py in this example)
+* ./tests/python_unit_tests/test_azure_storage_account.py - Test script for Storage Account code within the azure module.
 
 # SETUP
 ## pylint
