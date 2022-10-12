@@ -3,7 +3,7 @@ import json
 from .context import az
 from azure.identity import AzureCliCredential
 
-config_file_path = "../../testing_config.json"
+config_file_path = "./testing_config.json"
 
 # import base json configuration file
 with open(config_file_path, "r") as config_base:
