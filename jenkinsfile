@@ -32,6 +32,8 @@ pipeline {
         }
         stage ("python unit tests") {
             steps {
+                sh("ls ./tests -la")
+                sh("ls ./tests/python_unit_tests/ -la")
                 sh("python3 -m pytest ./tests/python_unit_tests/ -vv")
             }
         }
