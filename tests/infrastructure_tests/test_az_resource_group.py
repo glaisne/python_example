@@ -1,6 +1,6 @@
 # import the azure module from the parent directory
 import json
-from .context import az
+from ..context import az
 from azure.identity import AzureCliCredential
 
 config_file_path = "./testing_config.json"

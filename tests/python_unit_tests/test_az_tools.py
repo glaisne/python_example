@@ -3,7 +3,7 @@ Tests for all the "tools" functions in the azure module
 '''
 
 # import the azure module from the parent directory
-from .context import az
+from ..context import az
 
 # guid tests
 
