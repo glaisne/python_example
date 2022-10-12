@@ -6,7 +6,8 @@ pipeline {
         }
     }
     environment {
-        Test_Subscription_ID     = credentials('Test_Subscription_ID')
+        TEST_SUBSCRIPTION_ID     = credentials('Test_Subscription_ID')
+        AZURE_TENANT_ID     = credentials('Azure_Tenant_ID')
     }
     stages {
         stage ("setup") {
@@ -47,7 +48,7 @@ pipeline {
                         -t ${AZURE_TENANT_ID} \
                         --query "[?isDefault].{name: name, isDefault: isDefault, state: state, TenantId: homeTenantId, id: id}"
                     az account set \
-                        -s ${Test_Subscription_ID}
+                        -s ${TEST_SUBSCRIPTION_ID}
                     az account list \
                         --query "[?isDefault].{name: name, isDefault: isDefault, state: state, TenantId: homeTenantId, id: id}"
                 '''
