@@ -150,6 +150,7 @@ def create_resource_group(credential, config):
     (string) <json>: Json information about the resoruce group that was created
     
     Exceptions:
+    ValueError
     httpresponseerror - https://learn.microsoft.com/en-us/python/api/azure-core/azure.core.exceptions.httpresponseerror?view=azure-python
     '''
     # validate parameters
