@@ -5,6 +5,9 @@ pipeline {
             label 'linux'
         }
     }
+    environment {
+        Test_Subscription_ID     = credentials('Test_Subscription_ID')
+    }
     stages {
         stage ("setup") {
             steps {
@@ -29,6 +32,26 @@ pipeline {
         stage ("python unit tests") {
             steps {
                 sh("python3 -m pytest tests/ -vv")
+            }
+        }
+        stage ("Azure Auth") {
+            steps {
+                echo 'Connecting to Azure and setting the proper subscription'
+                // login Azure
+                withCredentials([usernamePassword(credentialsId: 'TestingGlaisne', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
+                sh '''
+                    az login \
+                        --service-principal \
+                        -u $AZURE_CLIENT_ID \
+                        -p $AZURE_CLIENT_SECRET \
+                        -t ${AZURE_TENANT_ID} \
+                        --query "[?isDefault].{name: name, isDefault: isDefault, state: state, TenantId: homeTenantId, id: id}"
+                    az account set \
+                        -s ${Test_Subscription_ID}
+                    az account list \
+                        --query "[?isDefault].{name: name, isDefault: isDefault, state: state, TenantId: homeTenantId, id: id}"
+                '''
+                }
             }
         }
     }
