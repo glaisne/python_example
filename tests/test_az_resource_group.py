@@ -3,6 +3,8 @@ import json
 from .context import az
 from azure.identity import AzureCliCredential
 
+config_file_path = "testing_config.json"
+
 # import base json configuration file
 with open(config_file_path, "r") as config_base:
     config_data = config_base.read()
@@ -15,4 +17,4 @@ credential = AzureCliCredential()
 
 #todo: Working here. getting everything together ot create a resoruce group and try testing it.
 
-az.create_resource_group()
+# <not ready yet> az.create_resource_group(credential, config)
