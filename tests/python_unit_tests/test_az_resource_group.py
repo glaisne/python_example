@@ -28,19 +28,19 @@ def credential():
 
 @pytest.fixture
 def good_config():
-    config['subscription_id'] = "00000000-0000-0000-0000-000000000000"
+    config['subscription_id'] = '00000000-0000-0000-0000-000000000000'
     return config
 
 @pytest.fixture
 def config_with_bad_resource_group_name():
-    config['resource_group']["name"] = "bad|name."
-    config['subscription_id'] = "00000000-0000-0000-0000-000000000000"
+    config['resource_group']['name'] = 'bad|name.'
+    config['subscription_id'] = '00000000-0000-0000-0000-000000000000'
     return config
 
 @pytest.fixture
 def config_with_bad_location():
-    config['resource_group']["location"] = "bad_location"
-    config['subscription_id'] = "00000000-0000-0000-0000-000000000000"
+    config['resource_group']['location'] = 'bad_location'
+    config['subscription_id'] = '00000000-0000-0000-0000-000000000000'
     return config
 
 
