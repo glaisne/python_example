@@ -8,6 +8,7 @@ pipeline {
     environment {
         TEST_SUBSCRIPTION_ID     = credentials('Test_Subscription_ID')
         AZURE_TENANT_ID     = credentials('Azure_Tenant_ID')
+        ENVIRONMENT = 'DEV'
     }
     stages {
         stage ("setup") {
@@ -27,7 +28,7 @@ pipeline {
         }
         stage ("linting") {
             steps {
-                sh("python3 -m pylint --rcfile ./pylint.config --reports y az")
+                sh("python3 -m pylint --rcfile ./pylint.config --reports y az tests/python_unit_tests tests/infrastructure_tests")
             }
         }
         stage ("python unit tests") {
@@ -62,17 +63,7 @@ pipeline {
         }
         stage ("Infrastructure tests") {
             steps {
-                sh("pwd")
-                sh("ls -la")
-                sh("ls tests -la")
-                sh("ls tests/infrastructre_tests -la")
-                sh("ls ./tests/infrastructre_tests/test_az_resource_group.py -la")
-                //sh("cp ./config_testing.py tests/config_testing.py")
-                //sh("python3 tests/infrastructre_tests/test_storage_account.py")
-                sh("python3 tests/infrastructre_tests/test_az_resource_group.py")
-                //sh("python3 tests/infrastructre_tests/test_container_registry.py")
-                //sh("python3 tests/infrastructre_tests/test_aks.py")
-                //sh("python3 tests/infrastructre_tests/test_nsg.py")
+                sh("python3 -m pytest tests/infrastructure_tests -vv")
             }
         }
 
