@@ -2,8 +2,14 @@
 Tests for all the "tools" functions in the azure module
 '''
 
+import os
+import sys
+
+# Adds the parent directory to the module search path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 # import the azure module from the parent directory
-from ..context import az
+from context import az
 
 # guid tests
 
@@ -71,7 +77,7 @@ def test_invalid_storage_account_name_01():
     '''
     assert az.validate_storage_account_name('this-is-1-invalid-namexxx') == 0
 
-def test_invalid_storage_account_name_01():
+def test_invalid_storage_account_name_02():
     '''
     test an invalid storage account name
     It is invalid because it has a '_'
