@@ -28,6 +28,3 @@ print(credential)
 
 # <not ready yet> az.create_resource_group(credential, config)
 
-def test_valid_guid():
-    '''test that a valid guid returns 1'''
-    assert az.validate_guid('670196b2-4db2-4cb2-a792-088bcfb4efc1') == 1
