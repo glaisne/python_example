@@ -133,10 +133,6 @@ def validate_storage_account_name(storage_account_name):
 ###############################################################################
 
 
-#! Currently working on this:
-#! Q: how can we do this without passing the subscription Id and credential to  each and every function?!
-#!    - Should we "set" those values in the module as global variables early on?
-#!    - Should we pass it in as one dictionary variable each time (cred, subscription_id, resoruce_group, locaiton...)
 
 def create_resource_group(credential, config):
     '''
