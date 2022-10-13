@@ -62,15 +62,6 @@ def process_json(json_as_string):
     return return_json
 
 
-
-
-
-
-
-
-
-print(f"subscription_id = {subscription_id}")
-
 # create the dictionary of passed in values that will be replaced or added to the json
 overwriters = {}
 
