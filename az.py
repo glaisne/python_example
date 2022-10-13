@@ -139,8 +139,11 @@ def create_resource_group(credential, config):
     Create a resource group with the given name in the given locaiton
 
     parameter:
-    resoruce_group_name (string): name of the resoruce group to be created
-    location (string): name of the location the resource group should be created in
+    credential (AzureCliCredential) - Cli credentials from az login.
+    config (dictionary): should contain the following values:
+        config['subscription_id']
+        config['resource_group']['name']
+        config['resource_group']['location']
 
     Returns:
     (string) <json>: Json information about the resoruce group that was created
@@ -165,6 +168,8 @@ def create_resource_group(credential, config):
                       config['subscription_id'])
 
     # Provision the resource group.
+    # https://learn.microsoft.com/en-us/python/api/azure-mgmt-resource/
+    # azure.mgmt.resource.resources.v2021_04_01.operations.resourcegroupsoperations?view=azure-python#azure-mgmt-resource-resources-v2021-04-01-operations-resourcegroupsoperations-create-or-update
     return resource_client.resource_groups.create_or_update(
         config['resource_group']['name'],
         {
