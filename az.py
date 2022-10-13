@@ -154,8 +154,8 @@ def create_resource_group(credential, config):
         raise ValueError(f"'{config['subscription_id']}' is NOT a valid"
                           " guid.")
     if not validate_resource_group_name(
-                config['resource_group_name']):
-        raise ValueError(f"'{config['resource_group_name']}' is NOT a valid"
+                config['resource_group']['name']):
+        raise ValueError(f"'{config['resource_group']['name']}' is NOT a valid"
                           " resource group name.")
     if not validate_location(config['location']):
         raise ValueError(f"'{config['location']}' is NOT a valid location.")
