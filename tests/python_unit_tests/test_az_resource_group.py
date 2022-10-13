@@ -33,14 +33,14 @@ def good_config():
 
 @pytest.fixture
 def config_with_bad_resource_group_name():
-    tmpconfig = config
+    tmpconfig = json.loads(config_data)
     tmpconfig['resource_group']['name'] = 'bad|name.'
     tmpconfig['subscription_id'] = '00000000-0000-0000-0000-000000000000'
     return tmpconfig
 
 @pytest.fixture
 def config_with_bad_location():
-    tmpconfig = config
+    tmpconfig = json.loads(config_data)
     tmpconfig['resource_group']['location'] = 'bad_location'
     tmpconfig['subscription_id'] = '00000000-0000-0000-0000-000000000000'
     return tmpconfig
