@@ -4,8 +4,8 @@ Tests for all resource group functions in the azure module
 
 import json
 import os
-import pytest
 import sys
+import pytest
 from azure.identity import AzureCliCredential
 
 # Adds the parent directory to the module search path
@@ -24,6 +24,7 @@ config = json.loads(config_data)
 
 @pytest.fixture
 def credential():
+    '''pytest fixture for cli credentials'''
     return AzureCliCredential()
 
 @pytest.fixture
@@ -53,9 +54,11 @@ def config_with_bad_location():
 #def create_rg_bad_rg_name(credential, good_config):
 
 def test_create_rg_bad_rg_name(credential, config_with_bad_resource_group_name):
+    '''pytest to validate the proper raise occurse with an invalid resource group name'''
     with pytest.raises(ValueError, match=' is NOT a valid resource group name'):
         az.create_resource_group(credential, config_with_bad_resource_group_name)
 
 def test_create_rg_bad_location(credential, config_with_bad_location):
+    '''pytest to validate the proper raise occurse with an invalid locaiton'''
     with pytest.raises(ValueError, match=' is NOT a valid location'):
         az.create_resource_group(credential, config_with_bad_location)

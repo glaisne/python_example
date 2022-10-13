@@ -29,9 +29,12 @@ resource_client = ResourceManagementClient(credential,
                     config['subscription_id'])
 
 def test_resource_group_name(client, config):
+    '''Test that the resource group exists and has the proper name'''
     rg = client.resource_groups.get(config['resource_group']['name'])
     assert rg != None
 
-def test_resource_group_name(client, config):
+def test_resource_group_location(client, config):
+    '''Test that the resource group is in the correct location'''
     rg = client.resource_groups.get(config['resource_group']['name'])
     assert rg.location == config['resource_group']['locaiton']
+    

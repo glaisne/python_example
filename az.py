@@ -168,8 +168,7 @@ def create_resource_group(credential, config):
                       config['subscription_id'])
 
     # Provision the resource group.
-    # https://learn.microsoft.com/en-us/python/api/azure-mgmt-resource/
-    # azure.mgmt.resource.resources.v2021_04_01.operations.resourcegroupsoperations?view=azure-python#azure-mgmt-resource-resources-v2021-04-01-operations-resourcegroupsoperations-create-or-update
+    # https://learn.microsoft.com/en-us/python/api/azure-mgmt-resource/azure.mgmt.resource.resources.v2021_04_01.operations.resourcegroupsoperations?view=azure-python#azure-mgmt-resource-resources-v2021-04-01-operations-resourcegroupsoperations-create-or-update
     return resource_client.resource_groups.create_or_update(
         config['resource_group']['name'],
         {
