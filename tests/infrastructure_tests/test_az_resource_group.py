@@ -5,6 +5,7 @@ import os
 import sys
 import json
 from azure.identity import AzureCliCredential
+from azure.mgmt.resource import ResourceManagementClient
 
 # Adds the parent directory to the module search path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -23,8 +24,10 @@ config = json.loads(config_data)
 # Acquire a credential object using CLI-based authentication.
 credential = AzureCliCredential()
 
-print(credential)
-# todo - Working here. getting everything together ot create a resoruce group and try testing it.
+# Obtain the management object for resources.
+resource_client = ResourceManagementClient(credential,
+                    config['subscription_id'])
 
-# <not ready yet> az.create_resource_group(credential, config)
-
+def test_resource_group_name(client, config):
+    rg = client.resource_groups.get(config['resource_group']['name'])
+    assert rg != None
