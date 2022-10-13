@@ -33,15 +33,17 @@ def good_config():
 
 @pytest.fixture
 def config_with_bad_resource_group_name():
-    config['resource_group']['name'] = 'bad|name.'
-    config['subscription_id'] = '00000000-0000-0000-0000-000000000000'
-    return config
+    tmpconfig = config
+    tmpconfig['resource_group']['name'] = 'bad|name.'
+    tmpconfig['subscription_id'] = '00000000-0000-0000-0000-000000000000'
+    return tmpconfig
 
 @pytest.fixture
 def config_with_bad_location():
-    config['resource_group']['location'] = 'bad_location'
-    config['subscription_id'] = '00000000-0000-0000-0000-000000000000'
-    return config
+    tmpconfig = config
+    tmpconfig['resource_group']['location'] = 'bad_location'
+    tmpconfig['subscription_id'] = '00000000-0000-0000-0000-000000000000'
+    return tmpconfig
 
 
 #def create_rg_bad_rg_name(credential, good_config):
