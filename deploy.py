@@ -18,11 +18,11 @@ credential = AzureCliCredential()
 try:
     opts, args = getopt.getopt(sys.argv[1:],"hc:",["CONFIG_FILE_PATH="])
 except getopt.GetoptError:
-    print('build_data.py -c <CONFIG_FILE_PATH>')
+    print('update_config_file.py -c <CONFIG_FILE_PATH>')
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
-        print('build_data.py -c <CONFIG_FILE_PATH>')
+        print('update_config_file.py -c <CONFIG_FILE_PATH>')
         sys.exit()
     elif opt in ("-c", "--CONFIG_FILE_PATH"):
         CONFIG_FILE_PATH = arg

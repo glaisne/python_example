@@ -15,8 +15,9 @@ pipeline {
             steps {
                 echo 'Install requirements...'
                 sh("pip3 install -r requirements.txt")
+                
                 echo 'Update json configuration'
-                sh("python3 ./build_data.py -s ${TEST_SUBSCRIPTION_ID} -f ./testing_config.json")
+                sh("python3 ./update_config_file.py -s ${TEST_SUBSCRIPTION_ID} -f ./testing_config.json")
             }
         }
         stage ("Information") {
