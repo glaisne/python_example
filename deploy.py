@@ -4,16 +4,6 @@ import json
 import sys
 from azure.identity import AzureCliCredential
 
-CONFIG_FILE_PATH = "./testing_config.json"
-
-# import base json configuration file
-with open(CONFIG_FILE_PATH, "r", encoding="utf-8") as config_base:
-    config_data = config_base.read()
-
-config = json.loads(config_data)
-
-# Acquire a credential object using CLI-based authentication.
-credential = AzureCliCredential()
 
 try:
     opts, args = getopt.getopt(sys.argv[1:],"hc:",["CONFIG_FILE_PATH="])
@@ -27,7 +17,13 @@ for opt, arg in opts:
     elif opt in ("-c", "--CONFIG_FILE_PATH"):
         CONFIG_FILE_PATH = arg
 
+# import base json configuration file
+with open(CONFIG_FILE_PATH, "r", encoding="utf-8") as config_base:
+    config_data = config_base.read()
 
-#todo: Working here. getting everything together ot create a resoruce group and try testing it.
+config = json.loads(config_data)
 
-# <not ready yet> az.create_resource_group(credential, config)
+# Acquire a credential object using CLI-based authentication.
+credential = AzureCliCredential()
+
+az.create_resource_group(credential, config)
