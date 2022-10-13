@@ -157,8 +157,8 @@ def create_resource_group(credential, config):
                 config['resource_group']['name']):
         raise ValueError(f"'{config['resource_group']['name']}' is NOT a valid"
                           " resource group name.")
-    if not validate_location(config['location']):
-        raise ValueError(f"'{config['location']}' is NOT a valid location.")
+    if not validate_location(config['resource_group']['location']):
+        raise ValueError(f"'{config['resource_group']['location']}' is NOT a valid location.")
 
     # Obtain the management object for resources.
     resource_client = ResourceManagementClient(credential,
