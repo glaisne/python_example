@@ -18,16 +18,18 @@
 import json, re, getopt, sys, pprint
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:],"hs",["subscription_id="])
+    opts, args = getopt.getopt(sys.argv[1:],"hs:f:",["subscription_id=", "file_path="])
 except getopt.GetoptError:
-    print('build_data.py -s <subscription_id>')
+    print('build_data.py -s <subscription_id> -f <file_path>')
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
-        print('build_data.py -s <subscription_id>')
+        print('build_data.py -s <subscription_id> -f <file_path>')
         sys.exit()
     elif opt in ("-s", "--subscription_id"):
         source_ip = arg
+    elif opt in ("-f", "--file_path"):
+        file_path = arg
 
 
 def process_json(json_as_string):
@@ -67,18 +69,13 @@ def process_json(json_as_string):
 
 
 
-print(f"source_ip = {source_ip}")
-print(f"username  = {username}")
-print(f"file_path = {file_path}")
+print(f"subscription_id = {subscription_id}")
 
 # create the dictionary of passed in values that will be replaced or added to the json
 overwriters = {}
 
-if (username):
-    overwriters["username"] = username
-
-if (source_ip):
-    overwriters["source_ip"] = source_ip
+if (subscription_id):
+    overwriters["subscription_id"] = subscription_id
 
 # import base json configuration file
 with open(file_path, "r") as config_base:
