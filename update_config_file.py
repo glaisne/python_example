@@ -101,5 +101,5 @@ config = process_json(config)
 config = process_json(config)
 
 # Write back to disk the updated json file
-with open('./config_updated.json', "w") as output:
+with open(file_path, "w") as output:
     output.write(config)
