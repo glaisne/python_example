@@ -31,3 +31,7 @@ resource_client = ResourceManagementClient(credential,
 def test_resource_group_name(client, config):
     rg = client.resource_groups.get(config['resource_group']['name'])
     assert rg != None
+
+def test_resource_group_name(client, config):
+    rg = client.resource_groups.get(config['resource_group']['name'])
+    assert rg.location == config['resource_group']['locaiton']
