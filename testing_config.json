@@ -1,4 +1,5 @@
 {
+    "subscription_id": "<subscription_id>",
     "resource_group": {
         "name": "python-testing-rg",
         "location": "eastus2"
