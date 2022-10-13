@@ -27,7 +27,7 @@ for opt, arg in opts:
         print('build_data.py -s <subscription_id> -f <file_path>')
         sys.exit()
     elif opt in ("-s", "--subscription_id"):
-        source_ip = arg
+        subscription_id = arg
     elif opt in ("-f", "--file_path"):
         file_path = arg
 
