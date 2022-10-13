@@ -28,11 +28,14 @@ def credential():
 
 @pytest.fixture
 def good_config():
-    config['subscription_id'] = '00000000-0000-0000-0000-000000000000'
-    return config
+    '''Take a valid configuration and add a generic guid subscription_id'''
+    tmpconfig = json.loads(config_data)
+    tmpconfig['subscription_id'] = '00000000-0000-0000-0000-000000000000'
+    return tmpconfig
 
 @pytest.fixture
 def config_with_bad_resource_group_name():
+    '''take a valid configuration and modify the resource group name to be bad'''
     tmpconfig = json.loads(config_data)
     tmpconfig['resource_group']['name'] = 'bad|name.'
     tmpconfig['subscription_id'] = '00000000-0000-0000-0000-000000000000'
@@ -40,6 +43,7 @@ def config_with_bad_resource_group_name():
 
 @pytest.fixture
 def config_with_bad_location():
+    '''take a valid configiruation and swap out a bad location'''
     tmpconfig = json.loads(config_data)
     tmpconfig['resource_group']['location'] = 'bad_location'
     tmpconfig['subscription_id'] = '00000000-0000-0000-0000-000000000000'
