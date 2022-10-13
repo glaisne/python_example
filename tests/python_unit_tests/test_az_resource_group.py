@@ -46,6 +46,6 @@ def config_with_bad_location():
 
 #def create_rg_bad_rg_name(credential, good_config):
 
-def test_vcreate_rg_bad_rg_name(credential, config_with_bad_resource_group_name):
+def test_create_rg_bad_rg_name(credential, config_with_bad_resource_group_name):
     with pytest.raises(ValueError, match=' is NOT a valid resource group name'):
         az.create_resource_group(credential, config_with_bad_resource_group_name)
