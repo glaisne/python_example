@@ -29,12 +29,15 @@ def config():
 # Acquire a credential object using CLI-based authentication.
 @pytest.fixture
 def credential():
-    return AzureCliCredential()
+    return_credential = AzureCliCredential()
+    return return_credential
 
 # Obtain the management object for resources.
 @pytest.fixture
 def client():
-    return ResourceManagementClient(credential, config['subscription_id'])
+    return_client =  ResourceManagementClient(credential, config['subscription_id'])
+    return return_client
+    
 
 def test_resource_group_name(client, config):
     '''Test that the resource group exists and has the proper name'''
