@@ -6,7 +6,7 @@ pipeline {
         }
     }
     environment {
-        TEST_SUBSCRIPTION_ID     = credentials('Test_Subscription_ID')
+        SUBSCRIPTION_ID     = credentials('SUBSCRIPTION_ID')
         AZURE_TENANT_ID     = credentials('Azure_Tenant_ID')
         ENVIRONMENT = 'STAGE'
     }
@@ -17,7 +17,7 @@ pipeline {
                 sh("pip3 install -r requirements.txt")
                 
                 echo 'Update json configuration'
-                sh("python3 ./update_config_file.py -s ${TEST_SUBSCRIPTION_ID} -f ./config_az.json")
+                sh("python3 ./update_config_file.py -s ${SUBSCRIPTION_ID} -f ./config_az.json")
             }
         }
         stage ("Information") {
@@ -52,7 +52,7 @@ pipeline {
                         -t ${AZURE_TENANT_ID} \
                         --query "[?isDefault].{name: name, isDefault: isDefault, state: state, TenantId: homeTenantId, id: id}"
                     az account set \
-                        -s ${TEST_SUBSCRIPTION_ID}
+                        -s ${SUBSCRIPTION_ID}
                     az account list \
                         --query "[?isDefault].{name: name, isDefault: isDefault, state: state, TenantId: homeTenantId, id: id}"
                 '''

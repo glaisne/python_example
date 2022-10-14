@@ -6,7 +6,7 @@ pipeline {
         }
     }
     environment {
-        TEST_SUBSCRIPTION_ID     = credentials('Test_Subscription_ID')
+        SUBSCRIPTION_ID     = credentials('SUBSCRIPTION_ID')
         AZURE_TENANT_ID     = credentials('Azure_Tenant_ID')
         ENVIRONMENT = 'OPSTESTING'
     }
@@ -18,7 +18,7 @@ pipeline {
                 pip3 install -r requirements.txt
                 
                 echo -e "date json configuration\n========================================================"
-                python3 ./update_config_file.py -s ${TEST_SUBSCRIPTION_ID} -f ./config_az.json
+                python3 ./update_config_file.py -s ${SUBSCRIPTION_ID} -f ./config_az.json
                 '''
             }
         }
@@ -54,7 +54,7 @@ pipeline {
                         -t ${AZURE_TENANT_ID} \
                         --query "[?isDefault].{name: name, isDefault: isDefault, state: state, TenantId: homeTenantId, id: id}"
                     az account set \
-                        -s ${TEST_SUBSCRIPTION_ID}
+                        -s ${SUBSCRIPTION_ID}
                     az account list \
                         --query "[?isDefault].{name: name, isDefault: isDefault, state: state, TenantId: homeTenantId, id: id}"
                 '''
