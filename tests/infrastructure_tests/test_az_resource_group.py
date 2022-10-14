@@ -44,8 +44,10 @@ def test_resource_group_name(client, config):
 
 def test_resource_group_with_bad_name(client, config):
     '''Test that an incorrect given name does not exist'''
-    rg = client.resource_groups.get('aksdhfoasndfkazsehfzsawsjs03885252')
-    assert rg == None
+    resource_group_name = 'aksdhfoasndfkazsehfzsawsjs03885252'
+    with pytest.raises(azure.core.exceptions.ResourceNotFoundError, match=f"Resource group '{resource_group_name}' could not be found"):
+        client.resource_groups.get('aksdhfoasndfkazsehfzsawsjs03885252')
+
 
 def test_resource_group_location(client, config):
     '''Test that the resource group is in the correct location'''
