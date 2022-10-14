@@ -24,11 +24,11 @@ pipeline {
         }
         stage ("Information") {
             steps {
-                echo 'Designing a python/Jenkins example setup'
-
-                echo 'Python information'
-                sh("pip3 list")
-                sh("python3 -V")
+                sh '''
+                echo -e "Python information\n========================================================"
+                python3 -V
+                pip3 list
+                '''
             }
         }
         stage ("linting") {
