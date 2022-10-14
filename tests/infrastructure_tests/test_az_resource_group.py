@@ -29,7 +29,7 @@ def config():
 
 # Obtain the management object for resources.
 @pytest.fixture
-def client():
+def client(config):
     # Acquire a credential object using CLI-based authentication.
     credential = AzureCliCredential()
 
