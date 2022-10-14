@@ -4,6 +4,7 @@ Testing resource groups created by the az module
 import os
 import sys
 import json
+import pytest
 from azure.identity import AzureCliCredential
 from azure.mgmt.resource import ResourceManagementClient
 
@@ -22,7 +23,7 @@ def config():
     # import base json configuration file
     with open(CONFIG_FILE_PATH, "r", encoding="utf-8") as config_base:
         config_data = config_base.read()
-        
+
     return json.loads(config_data)
 
 # Acquire a credential object using CLI-based authentication.

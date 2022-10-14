@@ -63,7 +63,7 @@ def validate_resource_group_name(resource_group_name):
             return 1
     else:
         return 0
-        
+
 
 def validate_location(location):
     '''
