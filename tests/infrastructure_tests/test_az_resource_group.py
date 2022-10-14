@@ -42,7 +42,17 @@ def test_resource_group_name(client, config):
     rg = client.resource_groups.get(config['resource_group']['name'])
     assert rg != None
 
+def test_resource_group_with_bad_name(client, config):
+    '''Test that an incorrect given name does not exist'''
+    rg = client.resource_groups.get('aksdhfoasndfkazsehfzsawsjs03885252')
+    assert rg == None
+
 def test_resource_group_location(client, config):
     '''Test that the resource group is in the correct location'''
     rg = client.resource_groups.get(config['resource_group']['name'])
     assert rg.location == config['resource_group']['location']
+
+def test_resource_group_is_not_in_a_different_location(client, config):
+    '''Test that the resource group is not in an incorrect location'''
+    rg = client.resource_groups.get(config['resource_group']['name'])
+    assert rg.location != 'norwaywest'
