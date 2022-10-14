@@ -58,13 +58,10 @@ def validate_resource_group_name(resource_group_name):
         # hyphen, period (except at end), and Unicode characters 
         # that match the allowed characters.
         if re.match(r".*\.$", resource_group_name):
-            print('first 0')
             return 0
         else:
-            print('first 1')
             return 1
     else:
-        print('second 0')
         return 0
         
 
