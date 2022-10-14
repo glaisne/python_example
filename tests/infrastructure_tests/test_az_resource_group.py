@@ -45,4 +45,4 @@ def test_resource_group_name(client, config):
 def test_resource_group_location(client, config):
     '''Test that the resource group is in the correct location'''
     rg = client.resource_groups.get(config['resource_group']['name'])
-    assert rg.location == config['resource_group']['locaiton']
+    assert rg.location == config['resource_group']['location']
