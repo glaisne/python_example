@@ -1,0 +1,74 @@
+pipeline {
+
+    agent { 
+        node { 
+            label 'linux'
+        }
+    }
+    environment {
+        TEST_SUBSCRIPTION_ID     = credentials('Test_Subscription_ID')
+        AZURE_TENANT_ID     = credentials('Azure_Tenant_ID')
+        ENVIRONMENT = 'PROD'
+    }
+    stages {
+        stage ("setup") {
+            steps {
+                echo 'Install requirements...'
+                sh("pip3 install -r requirements.txt")
+                
+                echo 'Update json configuration'
+                sh("python3 ./update_config_file.py -s ${TEST_SUBSCRIPTION_ID} -f ./testing_config.json")
+            }
+        }
+        stage ("Information") {
+            steps {
+                echo 'Designing a python/Jenkins example setup'
+
+                echo 'Python information'
+                sh("pip3 list")
+                sh("python3 -V")
+            }
+        }
+        stage ("linting") {
+            steps {
+                sh("python3 -m pylint --rcfile ./pylint.config --reports y --exit-zero az tests/python_unit_tests tests/infrastructure_tests")
+            }
+        }
+        stage ("python unit tests") {
+            steps {
+                sh("python3 -m pytest tests/python_unit_tests/ -vv")
+            }
+        }
+        stage ("Azure Auth") {
+            steps {
+                echo 'Connecting to Azure and setting the proper subscription'
+                // login Azure
+                withCredentials([usernamePassword(credentialsId: 'TestingGlaisne', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
+                sh '''
+                    az login \
+                        --service-principal \
+                        -u $AZURE_CLIENT_ID \
+                        -p $AZURE_CLIENT_SECRET \
+                        -t ${AZURE_TENANT_ID} \
+                        --query "[?isDefault].{name: name, isDefault: isDefault, state: state, TenantId: homeTenantId, id: id}"
+                    az account set \
+                        -s ${TEST_SUBSCRIPTION_ID}
+                    az account list \
+                        --query "[?isDefault].{name: name, isDefault: isDefault, state: state, TenantId: homeTenantId, id: id}"
+                '''
+                }
+            }
+        }
+        stage ("Azure_Deploy_Infrastructre") {
+            steps {
+                sh("python3 ./deploy.py -c ./testing_config.json")
+            }
+        }
+        stage ("Infrastructure tests") {
+            steps {
+                sh("python3 -m pytest tests/infrastructure_tests -vv")
+            }
+        }
+
+    }
+}
