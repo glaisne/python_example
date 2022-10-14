@@ -6,7 +6,7 @@ pipeline {
         }
     }
     environment {
-        SUBSCRIPTION_ID     = credentials('Dev_Subscription_ID')
+        SUBSCRIPTION_ID     = credentials('DEV_SUBSCRIPTION_ID')
         AZURE_TENANT_ID     = credentials('Azure_Tenant_ID')
         ENVIRONMENT = 'DEV'
     }
