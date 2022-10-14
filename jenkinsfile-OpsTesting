@@ -17,7 +17,7 @@ pipeline {
                 echo -e "Install requirements\n========================================================"
                 pip3 install -r requirements.txt
                 
-                echo -e "date json configuration\n========================================================"
+                echo -e "Update json configuration\n========================================================"
                 #python3 ./update_config_file.py -s ${SUBSCRIPTION_ID} -e ${ENVIRONMENT} -f ./config_az.json
                 sed -i "s/<subscription_id>/${SUBSCRIPTION_ID}/" ./config_az.json
                 cat ./config_az.json
