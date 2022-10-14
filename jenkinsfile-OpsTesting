@@ -8,6 +8,7 @@ pipeline {
     environment {
         SUBSCRIPTION_ID     = credentials('Test_Subscription_ID')
         AZURE_TENANT_ID     = credentials('Azure_Tenant_ID')
+        CLOUD_CODE = 'az'
         ENVIRONMENT = 'OPSTESTING'
     }
     stages {
@@ -19,9 +20,9 @@ pipeline {
                 
                 echo -e "Update json configuration\n========================================================"
                 #python3 ./update_config_file.py -s ${SUBSCRIPTION_ID} -e ${ENVIRONMENT} -f ./config_az.json
-                sed -i "s/<subscription_id>/${SUBSCRIPTION_ID}/" ./config_az.json
-                sed -i "s/<environment>/${ENVIRONMENT}/" ./config_az.json
-                cat ./config_az.json
+                sed -i "s/<subscription_id>/${SUBSCRIPTION_ID}/" ./config_${CLOUD_CODE}.json
+                sed -i "s/<environment>/${ENVIRONMENT}/" ./config_${CLOUD_CODE}.json
+                cat ./config_${CLOUD_CODE}.json
                 '''
             }
         }
@@ -36,7 +37,7 @@ pipeline {
         }
         stage ("linting") {
             steps {
-                sh("python3 -m pylint --rcfile ./pylint_config --reports y --exit-zero az tests/python_unit_tests tests/infrastructure_tests")
+                sh("python3 -m pylint --rcfile ./pylint_config --reports y --exit-zero ${CLOUD_CODE} tests/python_unit_tests tests/infrastructure_tests")
             }
         }
         stage ("python unit tests") {
@@ -64,9 +65,9 @@ pipeline {
                 }
             }
         }
-        stage ("Azure_Deploy_Infrastructre") {
+        stage ("Deploy_Infrastructre") {
             steps {
-                sh("python3 ./deploy_az.py -c ./config_az.json")
+                sh("python3 ./deploy_${CLOUD_CODE}.py -c ./config_${CLOUD_CODE}.json")
             }
         }
         stage ("Infrastructure tests") {
