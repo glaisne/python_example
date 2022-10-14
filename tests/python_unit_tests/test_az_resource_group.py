@@ -22,28 +22,28 @@ with open(CONFIG_FILE_PATH, "r", encoding="utf-8") as config_base:
 
 config = json.loads(config_data)
 
-@pytest.fixture
-def credential():
+@pytest.fixture(name="credential")
+def setup_credential():
     '''pytest fixture for cli credentials'''
     return AzureCliCredential()
 
-@pytest.fixture
-def good_config():
+@pytest.fixture(name="good_config")
+def setup_good_config():
     '''Take a valid configuration and add a generic guid subscription_id'''
     tmpconfig = json.loads(config_data)
     tmpconfig['subscription_id'] = '00000000-0000-0000-0000-000000000000'
     return tmpconfig
 
-@pytest.fixture
-def config_with_bad_resource_group_name():
+@pytest.fixture(name="config_with_bad_resource_group_name")
+def setup_config_with_bad_resource_group_name():
     '''take a valid configuration and modify the resource group name to be bad'''
     tmpconfig = json.loads(config_data)
     tmpconfig['resource_group']['name'] = 'bad|name.'
     tmpconfig['subscription_id'] = '00000000-0000-0000-0000-000000000000'
     return tmpconfig
 
-@pytest.fixture
-def config_with_bad_location():
+@pytest.fixture(name="config_with_bad_location")
+def setup_config_with_bad_location():
     '''take a valid configiruation and swap out a bad location'''
     tmpconfig = json.loads(config_data)
     tmpconfig['resource_group']['location'] = 'bad_location'
