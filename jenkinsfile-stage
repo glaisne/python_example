@@ -36,7 +36,7 @@ pipeline {
         }
         stage ("linting") {
             steps {
-                sh("python3 -m pylint --rcfile ./pylint.config --reports y --exit-zero az tests/python_unit_tests tests/infrastructure_tests")
+                sh("python3 -m pylint --rcfile ./pylint_config --reports y --exit-zero az tests/python_unit_tests tests/infrastructure_tests")
             }
         }
         stage ("python unit tests") {

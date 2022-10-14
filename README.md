@@ -21,8 +21,8 @@ the defaults.
 
 # PROCESS
 1. pylint
-   1. pylint --rcfile .\pylint.config azure
-   2. pylint --rcfile .\pylint.config tests\test_azure_tools.py
+   1. pylint --rcfile .\pylint_config azure
+   2. pylint --rcfile .\pylint_config tests\test_azure_tools.py
 2. tests
    1. py -m pytest .\tests\test_azure_tools.py -or- py -m pytest -v
 
