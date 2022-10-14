@@ -7,6 +7,13 @@ import json
 import pytest
 from azure.identity import AzureCliCredential
 from azure.mgmt.resource import ResourceManagementClient
+from azure.core.exceptions import (
+#    ClientAuthenticationError,
+#    HttpResponseError,
+#    ServiceRequestError,
+    ResourceNotFoundError,
+#    AzureError
+)
 
 # Adds the parent directory to the module search path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
