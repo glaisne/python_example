@@ -6,7 +6,7 @@ pipeline {
         }
     }
     environment {
-        SUBSCRIPTION_ID     = credentials('TEST_SUBSCRIPTION_ID')
+        SUBSCRIPTION_ID     = credentials('Test_Subscription_ID')
         AZURE_TENANT_ID     = credentials('Azure_Tenant_ID')
         ENVIRONMENT = 'OPSTESTING'
     }
