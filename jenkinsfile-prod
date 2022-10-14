@@ -19,6 +19,7 @@ pipeline {
                 
                 echo -e "date json configuration\n========================================================"
                 python3 ./update_config_file.py -s ${SUBSCRIPTION_ID} -f ./config_az.json
+                cat ./config_az.json
                 '''
             }
         }
