@@ -25,7 +25,7 @@ from context import az
 
 @pytest.fixture
 def config():
-    CONFIG_FILE_PATH = "./testing_config.json"
+    CONFIG_FILE_PATH = "./config_az.json"
 
     # import base json configuration file
     with open(CONFIG_FILE_PATH, "r", encoding="utf-8") as config_base:

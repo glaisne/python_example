@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 # import the azure module from the parent directory
 from context import az
 
-CONFIG_FILE_PATH = os.path.relpath(os.path.join(os.path.dirname(__file__), '../../testing_config.json'))
+CONFIG_FILE_PATH = os.path.relpath(os.path.join(os.path.dirname(__file__), '../../config_az.json'))
 
 # import base json configuration file
 with open(CONFIG_FILE_PATH, "r", encoding="utf-8") as config_base:

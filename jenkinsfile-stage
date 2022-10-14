@@ -17,7 +17,7 @@ pipeline {
                 sh("pip3 install -r requirements.txt")
                 
                 echo 'Update json configuration'
-                sh("python3 ./update_config_file.py -s ${TEST_SUBSCRIPTION_ID} -f ./testing_config.json")
+                sh("python3 ./update_config_file.py -s ${TEST_SUBSCRIPTION_ID} -f ./config_az.json")
             }
         }
         stage ("Information") {
@@ -61,7 +61,7 @@ pipeline {
         }
         stage ("Azure_Deploy_Infrastructre") {
             steps {
-                sh("python3 ./deploy.py -c ./testing_config.json")
+                sh("python3 ./deploy.py -c ./config_az.json")
             }
         }
         stage ("Infrastructure tests") {
