@@ -18,7 +18,7 @@
 import json, re, getopt, sys, pprint
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:],"hs:f:",["subscription_id=", "file_path="])
+    opts, args = getopt.getopt(sys.argv[1:],"hs:e:f:",["subscription_id=", "environment=", "file_path="])
 except getopt.GetoptError:
     print('update_config_file.py -s <subscription_id> -f <file_path>')
     sys.exit(2)
@@ -28,6 +28,8 @@ for opt, arg in opts:
         sys.exit()
     elif opt in ("-s", "--subscription_id"):
         subscription_id = arg
+    elif opt in ("-e", "--environment"):
+        environment = arg
     elif opt in ("-f", "--file_path"):
         file_path = arg
 
@@ -67,6 +69,9 @@ overwriters = {}
 
 if (subscription_id):
     overwriters["subscription_id"] = subscription_id
+
+if (environment):
+    overwriters["environment"] = environment
 
 # import base json configuration file
 with open(file_path, "r") as config_base:
