@@ -28,7 +28,7 @@ from azure.core.exceptions import (
 @pytest.fixture(name='config')
 def setup_config():
     '''load the json config file'''
-    config_file_path = "./config_az.json"
+    config_file_path = "./config/config_az.json"
 
     # import base json configuration file
     with open(config_file_path, "r", encoding="utf-8") as config_base:

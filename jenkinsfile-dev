@@ -6,7 +6,7 @@ pipeline {
         }
     }
     environment {
-        SUBSCRIPTION_ID     = credentials('Dev_Subscription_ID')
+        SUBSCRIPTION_ID     = credentials('psudo-subscription-id')
         AZURE_TENANT_ID     = credentials('Azure_Tenant_ID')
         ENVIRONMENT = 'DEV'
     }
@@ -18,10 +18,10 @@ pipeline {
                 pip3 install -r requirements.txt
                 
                 echo -e "date json configuration\n========================================================"
-                #python3 ./update_config_file.py -s ${SUBSCRIPTION_ID} -e ${ENVIRONMENT} -f ./config_az.json
-                sed -i "s/<subscription_id>/${SUBSCRIPTION_ID}/" ./config_az.json
-                sed -i "s/<environment>/${ENVIRONMENT}/" ./config_az.json
-                cat ./config_az.json
+                #python3 ./update_config_file.py -s ${SUBSCRIPTION_ID} -e ${ENVIRONMENT} -f ./config/config_az.json
+                sed -i "s/<subscription_id>/${SUBSCRIPTION_ID}/" ./config/config_az.json
+                sed -i "s/<environment>/${ENVIRONMENT}/" ./config/config_az.json
+                cat ./config/config_az.json
                 '''
             }
         }
@@ -66,7 +66,7 @@ pipeline {
         }
         stage ("Azure_Deploy_Infrastructre") {
             steps {
-                sh("python3 ./deploy_az.py -c ./config_az.json")
+                sh("python3 ./deploy_az.py -c ./config/config_az.json")
             }
         }
         stage ("Infrastructure tests") {

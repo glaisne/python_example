@@ -19,7 +19,7 @@ pipeline {
                 pip3 install -r requirements.txt
                 
                 echo -e "Update json configuration\n========================================================"
-                #python3 ./update_config_file.py -s ${SUBSCRIPTION_ID} -e ${ENVIRONMENT} -f ./config_az.json
+                #python3 ./update_config_file.py -s ${SUBSCRIPTION_ID} -e ${ENVIRONMENT} -f ./config/config_az.json
                 sed -i "s/<subscription_id>/${SUBSCRIPTION_ID}/" ./config_${CLOUD_CODE}.json
                 sed -i "s/<environment>/${ENVIRONMENT}/" ./config_${CLOUD_CODE}.json
                 cat ./config_${CLOUD_CODE}.json
@@ -45,7 +45,7 @@ pipeline {
                 sh("python3 -m pytest tests/python_unit_tests/ -vv")
             }
         }
-        stage ("Azure Auth") {
+        stage ("Cloud Authentication") {
             steps {
                 echo 'Connecting to Azure and setting the proper subscription'
                 // login Azure
