@@ -25,6 +25,7 @@ pipeline {
                 sed -i "s/<subscription_id>/${SUBSCRIPTION_ID}/" ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
                 sed -i "s/<environment>/${ENVIRONMENT}/" ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
                 cat ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
+                cp ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json ./tests/infrastructure_tests/config.json
                 '''
             }
         }
@@ -74,7 +75,7 @@ pipeline {
         }
         stage ("Infrastructure tests") {
             steps {
-                sh("python3 -m pytest tests/infrastructure_tests -vv")
+                sh("python3 -m pytest tests/infrastructure_tests -k '_${CLOUD_CODE_'-vv")
             }
         }
 
