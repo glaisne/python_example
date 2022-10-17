@@ -48,24 +48,24 @@ def setup_client(config):
     return return_client
 
 
-def test_resource_group_name(client, config):
+def test_az_resource_group_name(client, config):
     '''Test that the resource group exists and has the proper name'''
     resource_group = client.resource_groups.get(config['resource_group']['name'])
     assert resource_group is not None
 
-def test_resource_group_with_bad_name(client):
+def test_az_resource_group_with_bad_name(client):
     '''Test that an incorrect given name does not exist'''
     resource_group_name = 'aksdhfoasndfkazsehfzsawsjs03885252'
     with pytest.raises(ResourceNotFoundError, match=f"Resource group '{resource_group_name}' could not be found"):
         client.resource_groups.get('aksdhfoasndfkazsehfzsawsjs03885252')
 
 
-def test_resource_group_location(client, config):
+def test_az_resource_group_location(client, config):
     '''Test that the resource group is in the correct location'''
     resource_group = client.resource_groups.get(config['resource_group']['name'])
     assert resource_group.location == config['resource_group']['location']
 
-def test_resource_group_is_not_in_a_different_location(client, config):
+def test_az_resource_group_is_not_in_a_different_location(client, config):
     '''Test that the resource group is not in an incorrect location'''
     resource_group = client.resource_groups.get(config['resource_group']['name'])
     assert resource_group.location != 'norwaywest'
