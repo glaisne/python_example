@@ -20,6 +20,8 @@ pipeline {
                 
                 echo -e "Update json configuration\n========================================================"
                 #python3 ./update_config_file.py -s ${SUBSCRIPTION_ID} -e ${ENVIRONMENT} -f ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
+                ls ./config -la
+                ls ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json -la
                 sed -i "s/<subscription_id>/${SUBSCRIPTION_ID}/" ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
                 sed -i "s/<environment>/${ENVIRONMENT}/" ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
                 cat ./config/config_${CLOUD_CODE}.json
