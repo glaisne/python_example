@@ -19,10 +19,10 @@ pipeline {
                 pip3 install -r requirements.txt
                 
                 echo -e "Update json configuration\n========================================================"
-                #python3 ./update_config_file.py -s ${SUBSCRIPTION_ID} -e ${ENVIRONMENT} -f ./config/config_az_OpsTesting.json
-                sed -i "s/<subscription_id>/${SUBSCRIPTION_ID}/" ./config_${CLOUD_CODE}.json
-                sed -i "s/<environment>/${ENVIRONMENT}/" ./config_${CLOUD_CODE}.json
-                cat ./config_${CLOUD_CODE}.json
+                #python3 ./update_config_file.py -s ${SUBSCRIPTION_ID} -e ${ENVIRONMENT} -f ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
+                sed -i "s/<subscription_id>/${SUBSCRIPTION_ID}/" ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
+                sed -i "s/<environment>/${ENVIRONMENT}/" ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
+                cat ./config/config_${CLOUD_CODE}.json
                 '''
             }
         }
@@ -67,7 +67,7 @@ pipeline {
         }
         stage ("Deploy_Infrastructre") {
             steps {
-                sh("python3 ./deploy_${CLOUD_CODE}.py -c ./config_${CLOUD_CODE}.json")
+                sh("python3 ./deploy_${CLOUD_CODE}.py -c ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json")
             }
         }
         stage ("Infrastructure tests") {
