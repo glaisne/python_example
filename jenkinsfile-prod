@@ -47,7 +47,7 @@ pipeline {
                 '''
             }
         }
-        stage ("Azure Auth") {
+        stage ("Cloud Authentication") {
             steps {
                 echo 'Connecting to Azure and setting the proper subscription'
                 // login Azure
@@ -67,7 +67,7 @@ pipeline {
                 }
             }
         }
-        stage ("Azure_Deploy_Infrastructre") {
+        stage ("Deploy_Infrastructre") {
             steps {
                 sh("python3 ./deploy_${CLOUD_CODE}_${ENVIRONMENT}.py -c ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json")
             }
