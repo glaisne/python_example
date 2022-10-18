@@ -67,6 +67,5 @@ pipeline {
                 sh("python3 -m pytest tests/infrastructure_tests -k _${CLOUD_CODE}_ -vv")
             }
         }
-
     }
 }

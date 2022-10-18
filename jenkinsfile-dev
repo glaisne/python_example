@@ -6,8 +6,9 @@ pipeline {
         }
     }
     environment {
-        SUBSCRIPTION_ID     = credentials('psudo-subscription-id')
+        SUBSCRIPTION_ID     = credentials('Test_Subscription_ID')
         AZURE_TENANT_ID     = credentials('Azure_Tenant_ID')
+        CLOUD_CODE = 'az'
         ENVIRONMENT = 'DEV'
     }
     stages {
@@ -19,9 +20,11 @@ pipeline {
                 
                 echo -e "date json configuration\n========================================================"
                 #python3 ./update_config_file.py -s ${SUBSCRIPTION_ID} -e ${ENVIRONMENT} -f ./config/config_az.json
-                sed -i "s/<subscription_id>/${SUBSCRIPTION_ID}/" ./config/config_az.json
-                sed -i "s/<environment>/${ENVIRONMENT}/" ./config/config_az.json
-                cat ./config/config_az.json
+                sed -i "s/<subscription_id>/${SUBSCRIPTION_ID}/" ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
+                sed -i "s/<environment>/${ENVIRONMENT}/" ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
+                cat ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
+                cp ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json ./tests/infrastructure_tests/config.json
+                cat ./tests/infrastructure_tests/config.json
                 '''
             }
         }
@@ -32,16 +35,6 @@ pipeline {
                 python3 -V
                 pip3 list
                 '''
-            }
-        }
-        stage ("linting") {
-            steps {
-                sh("python3 -m pylint --rcfile ./pylint_config --reports y --exit-zero az tests/python_unit_tests tests/infrastructure_tests")
-            }
-        }
-        stage ("python unit tests") {
-            steps {
-                sh("python3 -m pytest tests/python_unit_tests/ -vv")
             }
         }
         stage ("Azure Auth") {
@@ -66,14 +59,13 @@ pipeline {
         }
         stage ("Azure_Deploy_Infrastructre") {
             steps {
-                sh("python3 ./deploy_az.py -c ./config/config_az.json")
+                sh("python3 ./deploy_az.py -c ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json")
             }
         }
         stage ("Infrastructure tests") {
             steps {
-                sh("python3 -m pytest tests/infrastructure_tests -vv")
+                sh("python3 -m pytest tests/infrastructure_tests -k _${CLOUD_CODE}_ -vv")
             }
         }
-
     }
 }
