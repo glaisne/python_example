@@ -37,16 +37,6 @@ pipeline {
                 '''
             }
         }
-        stage ("linting") {
-            steps {
-                sh("python3 -m pylint --rcfile ./pylint_config --reports y --exit-zero az tests/python_unit_tests tests/infrastructure_tests")
-            }
-        }
-        stage ("python unit tests") {
-            steps {
-                sh("python3 -m pytest tests/python_unit_tests/ -vv")
-            }
-        }
         stage ("Azure Auth") {
             steps {
                 echo 'Connecting to Azure and setting the proper subscription'
@@ -69,7 +59,7 @@ pipeline {
         }
         stage ("Azure_Deploy_Infrastructre") {
             steps {
-                sh("python3 ./deploy_az.py -c ./config/config_az.json")
+                sh("python3 ./deploy_az.py -c ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json")
             }
         }
         stage ("Infrastructure tests") {
