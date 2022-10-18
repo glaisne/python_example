@@ -20,19 +20,14 @@ pipeline {
                 
                 echo -e "date json configuration\n========================================================"
                 
-                # do find and replace in the configuration file.
                 sed -i "s/<subscription_id>/${SUBSCRIPTION_ID}/" ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
                 sed -i "s/<environment>/${ENVIRONMENT}/" ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
 
-                # echo out the infrastructure config file
                 echo "infrastructure config file:
                 cat ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
 
-                # copy the config file to the infrastructre_tests directory--with a specific name--so that the
-                # infrastructre created can be tested with specifics.
                 cp ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json ./tests/infrastructure_tests/config.json
 
-                # echo out the infrastructure_tests config file
                 echo "infrastructure_tests config file (should be the same file):
                 cat ./tests/infrastructure_tests/config.json
                 '''
