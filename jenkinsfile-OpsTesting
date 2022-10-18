@@ -28,7 +28,7 @@ pipeline {
                 echo "infrastructure config file:
                 cat ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
 
-                # copy the config file to the infrastructre_tests directory (with a specific), so that the
+                # copy the config file to the infrastructre_tests directory--with a specific name--so that the
                 # infrastructre created can be tested with specifics.
                 cp ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json ./tests/infrastructure_tests/config.json
 
