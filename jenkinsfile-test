@@ -24,7 +24,7 @@ pipeline {
                 sed -i "s/<environment>/${ENVIRONMENT}/" ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
                 cat ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json
                 cp ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json ./tests/infrastructure_tests/config.json
-                cat ./config/config_az.json
+                cat ./tests/infrastructure_tests/config.json
                 '''
             }
         }
