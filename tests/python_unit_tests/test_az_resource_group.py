@@ -58,9 +58,9 @@ def setup_config_with_bad_location():
 def test_create_rg_bad_rg_name(credential, subscription_id, config_with_bad_resource_group_name):
     '''pytest to validate the proper raise occurse with an invalid resource group name'''
     with pytest.raises(ValueError, match=' is NOT a valid resource group name'):
-        az.create_resource_group(credential, config_with_bad_resource_group_name)
+        az.create_resource_group(credential, subscription_id, config_with_bad_resource_group_name)
 
 def test_create_rg_bad_location(credential, subscription_id, config_with_bad_location):
     '''pytest to validate the proper raise occurse with an invalid locaiton'''
     with pytest.raises(ValueError, match=' is NOT a valid location'):
-        az.create_resource_group(credential, config_with_bad_location)
+        az.create_resource_group(credential, subscription_id, config_with_bad_location)
