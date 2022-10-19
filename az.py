@@ -131,16 +131,16 @@ def validate_storage_account_name(storage_account_name):
 
 
 
-def create_resource_group(credential, config):
+def create_resource_group(credential, subscription_id, config):
     '''
     Create a resource group with the given name in the given locaiton
 
     parameter:
-    credential (AzureCliCredential) - Cli credentials from az login.
+    credential (AzureCliCredential): Cli credentials from az login.
+    subscription_id: Subscription ID to use
     config (dictionary): should contain the following values:
-        config['subscription_id']
-        config['resource_group']['name']
-        config['resource_group']['location']
+        config['name']
+        config['location']
 
     Returns:
     (string) <json>: Json information about the resoruce group that was created
@@ -150,25 +150,25 @@ def create_resource_group(credential, config):
     httpresponseerror - https://learn.microsoft.com/en-us/python/api/azure-core/azure.core.exceptions.httpresponseerror?view=azure-python
     '''
     # validate parameters
-    if not validate_guid(config['subscription_id']):
-        raise ValueError(f"'{config['subscription_id']}' is NOT a valid"
-                          " guid.")
-    if not validate_resource_group_name(
-                config['resource_group']['name']):
-        raise ValueError(f"'{config['resource_group']['name']}' is NOT a valid"
+    if not validate_guid(subscription_id):
+        raise ValueError(f"'{subscription_id}' is NOT a valid guid.")
+
+    if not validate_resource_group_name(config['name']):
+        raise ValueError(f"'{config['name']}' is NOT a valid"
                           " resource group name.")
-    if not validate_location(config['resource_group']['location']):
-        raise ValueError(f"'{config['resource_group']['location']}' is NOT a valid location.")
+
+    if not validate_location(config['location']):
+        raise ValueError(f"'{config['location']}' is NOT a valid location.")
 
     # Obtain the management object for resources.
     resource_client = ResourceManagementClient(credential,
-                      config['subscription_id'])
+                      subscription_id)
 
     # Provision the resource group.
     # https://learn.microsoft.com/en-us/python/api/azure-mgmt-resource/azure.mgmt.resource.resources.v2021_04_01.operations.resourcegroupsoperations?view=azure-python#azure-mgmt-resource-resources-v2021-04-01-operations-resourcegroupsoperations-create-or-update
     return resource_client.resource_groups.create_or_update(
-        config['resource_group']['name'],
+        config['name'],
         {
-            'location': config['resource_group']['location']
+            'location': config['location']
         }
     )
