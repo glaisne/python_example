@@ -69,7 +69,7 @@ pipeline {
         }
         stage ("Deploy_Infrastructre") {
             steps {
-                sh("python3 ./deploy_${CLOUD_CODE}.py -c ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json")
+                sh("python3 ./deploy_${CLOUD_CODE}.py -s ${SUBSCRIPTION_ID} -c ./config/config_${CLOUD_CODE}_${ENVIRONMENT}.json")
             }
         }
         stage ("Infrastructure tests") {
