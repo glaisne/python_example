@@ -20,7 +20,7 @@ CONFIG_FILE_PATH = os.path.relpath(os.path.join(os.path.dirname(__file__), '../.
 with open(CONFIG_FILE_PATH, "r", encoding="utf-8") as config_base:
     config_data = config_base.read()
 
-config = json.loads(config_data)
+
 
 #! todo: workout the tests if there are multiple of a resoruce, or if there are no resources of that type! 
 #! suggestion: just get the first one if there are multiple and test that.
@@ -36,6 +36,7 @@ config = json.loads(config_data)
 @pytest.fixture(name="rg_config")
 def setup_rg_config():
     '''pytest fixture for a single resource-related unit test'''
+    config = json.loads(config_data)
     if isinstance(config['resource_group'], dict):
         return config['resource_group']
     else:
