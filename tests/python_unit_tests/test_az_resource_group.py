@@ -27,12 +27,19 @@ config = json.loads(config_data)
 
 
 #def create_rg_bad_rg_name(credential, good_config):
-rg_config = None
-if isinstance(config['resource_group'], dict):
-    rg_config = config['resource_group']
-else:
-    rg_config = config['resource_group'][0]
+# rg_config = None
+# if isinstance(config['resource_group'], dict):
+#     rg_config = config['resource_group']
+# else:
+#     rg_config = config['resource_group'][0]
 
+@pytest.fixture(name="rg_config")
+def setup_rg_config():
+    '''pytest fixture for a single resource-related unit test'''
+    if isinstance(config['resource_group'], dict):
+        return config['resource_group']
+    else:
+        return config['resource_group'][0]
 
 
 @pytest.fixture(name="credential")
