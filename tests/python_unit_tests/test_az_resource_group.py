@@ -22,6 +22,18 @@ with open(CONFIG_FILE_PATH, "r", encoding="utf-8") as config_base:
 
 config = json.loads(config_data)
 
+#! todo: workout the tests if there are multiple of a resoruce, or if there are no resources of that type! 
+#! suggestion: just get the first one if there are multiple and test that.
+
+
+#def create_rg_bad_rg_name(credential, good_config):
+instance_to_test = None
+if isinstance(config['resource_group'], dict):
+    instance_to_test = config['resource_group']
+else:
+    instance_to_test = config['resource_group'][0]
+
+
 @pytest.fixture(name="credential")
 def setup_credential():
     '''pytest fixture for cli credentials'''
@@ -33,27 +45,28 @@ def setup_subscription_id():
     return '00000000-0000-0000-0000-000000000000'
 
 @pytest.fixture(name="good_config")
-def setup_good_config():
+def setup_good_config(rg_config):
     '''Take a valid configuration and add a generic guid subscription_id'''
-    tmpconfig = json.loads(config_data)
-    return tmpconfig
+    return rg_config
 
 @pytest.fixture(name="config_with_bad_resource_group_name")
-def setup_config_with_bad_resource_group_name():
+def setup_config_with_bad_resource_group_name(rg_config):
     '''take a valid configuration and modify the resource group name to be bad'''
-    tmpconfig = json.loads(config_data)
+    tmpconfig = rg_config
     tmpconfig['name'] = 'bad|name.'
     return tmpconfig
 
 @pytest.fixture(name="config_with_bad_location")
-def setup_config_with_bad_location():
+def setup_config_with_bad_location(rg_config):
     '''take a valid configiruation and swap out a bad location'''
-    tmpconfig = json.loads(config_data)
+    tmpconfig = rg_config
     tmpconfig['location'] = 'bad_location'
     return tmpconfig
 
 
-#def create_rg_bad_rg_name(credential, good_config):
+
+
+
 
 def test_create_rg_bad_rg_name(credential, subscription_id, config_with_bad_resource_group_name):
     '''pytest to validate the proper raise occurse with an invalid resource group name'''
