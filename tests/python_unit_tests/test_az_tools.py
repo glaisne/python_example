@@ -6,10 +6,10 @@ import os
 import sys
 
 # Adds the parent directory to the module search path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-# import the azure module from the parent directory
-from context import az
+# import the azure module from 2 directorys above
+import az
 
 # guid tests
 
